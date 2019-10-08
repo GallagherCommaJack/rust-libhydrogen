@@ -1,6 +1,3 @@
-use failure;
-#[macro_use]
-extern crate failure_derive;
 use libhydrogen_sys as ffi;
 
 pub mod errors;

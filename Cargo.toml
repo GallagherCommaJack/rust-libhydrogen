@@ -9,6 +9,4 @@ repository = "https://github.com/jedisct1/rust-libhydrogen"
 edition = "2018"
 
 [dependencies]
-failure = "0.1"
-failure_derive = "0.1"
 libhydrogen-sys = "0.7.3"

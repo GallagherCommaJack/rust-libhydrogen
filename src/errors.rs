@@ -1,19 +1,32 @@
-#[derive(Debug, Fail)]
+use std::{error, fmt};
+
+#[derive(Debug)]
 pub enum HydroError {
-    #[fail(display = "Invalid input")]
     InvalidInput,
-    #[fail(display = "Invalid key")]
     InvalidKey,
-    #[fail(display = "Invalid padding")]
     InvalidPadding,
-    #[fail(display = "Invalid probe")]
     InvalidProbe,
-    #[fail(display = "Invalid signature")]
     InvalidSignature,
-    #[fail(display = "Unable to decrypt the ciphertext")]
     DecryptionError,
-    #[fail(display = "Unable to initialized the hydrogen library")]
     InitError,
-    #[fail(display = "Unsupported output length")]
     UnsupportedOutputLength,
 }
+
+impl fmt::Display for HydroError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
+        use HydroError::*;
+
+        match self {
+            InvalidInput => write!(f, "Invalid input"),
+            InvalidKey => write!(f, "Invalid key"),
+            InvalidPadding => write!(f, "Invalid padding"),
+            InvalidProbe => write!(f, "Invalid probe"),
+            InvalidSignature => write!(f, "Invalid signature"),
+            DecryptionError => write!(f, "Unable to decrypt the ciphertext"),
+            InitError => write!(f, "Unable to initialize the hydrogen library"),
+            UnsupportedOutputLength => write!(f, "Unsupported output length"),
+        }
+    }
+}
+
+impl error::Error for HydroError {}
